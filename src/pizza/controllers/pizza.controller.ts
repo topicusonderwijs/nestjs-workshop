@@ -4,11 +4,14 @@ import { Pizza } from '../../entities/pizza.entity';
 import { PizzaNameValidationPipe } from '../pipes/pizza-name.pipe';
 import { PizzaDuplicateNameValidationPipe } from '../pipes/pizza-duplicate-name.pipe';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 
 @Controller('/pizza')
 @ApiTags('Pizza')
 export class PizzaController {
-    constructor(private readonly pizzaService: PizzaService) {}
+    constructor(@InjectPinoLogger(PizzaController.name) private readonly logger: PinoLogger, private readonly pizzaService: PizzaService) {
+        this.logger.debug('PizzaController created');
+    }
 
     @Get()
     @ApiOperation({ description: `Get all pizza's` })
