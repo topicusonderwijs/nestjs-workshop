@@ -27,4 +27,11 @@ export class PizzaService implements OnModuleInit {
   public async addPizza(pizza: Pizza): Promise<Pizza> {
     return this.pizzasRepository.save(pizza);
   }
+
+  public async getPizzaByName(name: string): Promise<Pizza> {
+    return this.pizzasRepository
+      .createQueryBuilder('pizza')
+      .where('pizza.name = :name', { name })
+      .getOne();
+  }
 }
