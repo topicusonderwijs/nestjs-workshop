@@ -34,4 +34,8 @@ export class PizzaService implements OnModuleInit {
       .where('pizza.name = :name', { name })
       .getOne();
   }
+
+  public async clearAll() {
+    await this.pizzasRepository.clear();
+  }
 }
