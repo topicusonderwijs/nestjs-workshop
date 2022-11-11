@@ -28,12 +28,16 @@ export class PizzaService implements OnModuleInit {
         return this.pizzasRepository.find();
     }
 
+    public async getPizzaById(id: number): Promise<Pizza | null> {
+        return this.pizzasRepository.findOneBy({ id });
+    }
+
     public async addPizza(pizza: Pizza): Promise<Pizza> {
         return this.pizzasRepository.save(pizza);
     }
 
-    public async getPizzaByName(name: string): Promise<Pizza> {
-        return this.pizzasRepository.createQueryBuilder('pizza').where('pizza.name = :name', { name }).getOne();
+    public async getPizzaByName(name: string): Promise<Pizza | null> {
+        return this.pizzasRepository.findOneBy({name});
     }
 
     public async clearAll() {

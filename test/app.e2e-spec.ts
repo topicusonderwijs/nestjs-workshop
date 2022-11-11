@@ -15,10 +15,26 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('Pizza found by id', () => {
+      return request(app.getHttpServer())
+        .get('/pizza/1')
+        .expect(200)
   });
+
+  it('Pizza not found by id', () => {
+    return request(app.getHttpServer())
+      .get('/pizza/234')
+      .expect(404)
+  });
+
+  it('Pizza with duplicate name', () => {
+    return request(app.getHttpServer())
+      .post('/pizza')
+      .send({
+        id: 1,
+        name: 'Salami',
+        size: 40
+      })
+      .expect(400);
+  })
 });
