@@ -40,8 +40,8 @@ export class PizzaController {
         type: Pizza,
     })
     @ApiNotFoundResponse({ description: 'Pizza could not be found'})
-    public async getPizzaById(@Param('id') id: string): Promise<Pizza> {
-        const pizza = await this.pizzaService.getPizzaById(+id);
+    public async getPizzaById(@Param('id') id: number): Promise<Pizza> {
+        const pizza = await this.pizzaService.getPizzaById(id);
         if (!pizza) throw new NotFoundException(`Pizza with id: ${id} not found`);
         return pizza;
     }

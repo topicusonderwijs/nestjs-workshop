@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsPositive, IsString } from "class-validator";
 
 @Entity()
 export class Pizza {
@@ -12,9 +13,11 @@ export class Pizza {
         example: 'Salami',
         description: 'The unique name of this pizza',
     })
+    @IsString()
     name: string;
 
     @Column()
     @ApiProperty({ example: 25, description: 'The size of this pizza in cm' })
+    @IsPositive()
     size: number;
 }

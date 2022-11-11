@@ -3,9 +3,14 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { Logger } from 'nestjs-pino';
+import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, { bufferLogs: true });
+
+    app.useGlobalPipes(new ValidationPipe({
+        transform: true
+    }))
     const logger = app.get(Logger);
     app.useLogger(logger);
     const config = new DocumentBuilder()
