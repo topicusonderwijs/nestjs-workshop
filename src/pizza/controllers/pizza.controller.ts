@@ -9,12 +9,12 @@ import { JwtAuthGuard } from '../../auth/guards/JwtAuthGuard';
 
 @Controller('/pizza')
 @ApiTags('Pizza')
+@UseGuards(JwtAuthGuard)
 export class PizzaController {
     constructor(@InjectPinoLogger(PizzaController.name) private readonly logger: PinoLogger, private readonly pizzaService: PizzaService) {
         this.logger.debug('PizzaController created');
     }
 
-    @UseGuards(JwtAuthGuard)
     @Get()
     @ApiOperation({ description: `Get all pizza's` })
     @ApiOkResponse({
