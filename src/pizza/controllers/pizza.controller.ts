@@ -1,17 +1,11 @@
-import { Body, Controller, Get, HttpCode, NotFoundException, Param, Post, UsePipes } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, NotFoundException, Param, Post, UseGuards, UsePipes } from '@nestjs/common';
 import { PizzaService } from '../services/pizza.service';
 import { Pizza } from '../../entities/pizza.entity';
 import { PizzaNameValidationPipe } from '../pipes/pizza-name.pipe';
 import { PizzaDuplicateNameValidationPipe } from '../pipes/pizza-duplicate-name.pipe';
-import {
-    ApiBadRequestResponse,
-    ApiCreatedResponse,
-    ApiNotFoundResponse,
-    ApiOkResponse,
-    ApiOperation,
-    ApiTags
-} from "@nestjs/swagger";
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
+import { JwtAuthGuard } from '../../auth/guards/JwtAuthGuard';
 
 @Controller('/pizza')
 @ApiTags('Pizza')
@@ -20,6 +14,7 @@ export class PizzaController {
         this.logger.debug('PizzaController created');
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get()
     @ApiOperation({ description: `Get all pizza's` })
     @ApiOkResponse({
@@ -39,7 +34,7 @@ export class PizzaController {
         description: `Pizza for a specific id`,
         type: Pizza,
     })
-    @ApiNotFoundResponse({ description: 'Pizza could not be found'})
+    @ApiNotFoundResponse({ description: 'Pizza could not be found' })
     public async getPizzaById(@Param('id') id: number): Promise<Pizza> {
         const pizza = await this.pizzaService.getPizzaById(id);
         if (!pizza) throw new NotFoundException(`Pizza with id: ${id} not found`);
