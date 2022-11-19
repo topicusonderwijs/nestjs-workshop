@@ -1,4 +1,16 @@
-import { Body, Controller, Get, HttpCode, NotFoundException, Param, Post, UseGuards, UsePipes } from '@nestjs/common';
+import {
+    Body,
+    CACHE_MANAGER,
+    Controller,
+    Get,
+    HttpCode,
+    Inject,
+    NotFoundException,
+    Param,
+    Post,
+    UseGuards,
+    UsePipes,
+} from '@nestjs/common';
 import { PizzaService } from '../services/pizza.service';
 import { Pizza } from '../../entities/pizza.entity';
 import { PizzaNameValidationPipe } from '../pipes/pizza-name.pipe';
@@ -6,12 +18,17 @@ import { PizzaDuplicateNameValidationPipe } from '../pipes/pizza-duplicate-name.
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { JwtAuthGuard } from '../../auth/guards/JwtAuthGuard';
+import { Cache } from 'cache-manager';
 
 @Controller('/pizza')
 @ApiTags('Pizza')
 @UseGuards(JwtAuthGuard)
 export class PizzaController {
-    constructor(@InjectPinoLogger(PizzaController.name) private readonly logger: PinoLogger, private readonly pizzaService: PizzaService) {
+    constructor(
+        @InjectPinoLogger(PizzaController.name) private readonly logger: PinoLogger,
+        private readonly pizzaService: PizzaService,
+        @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    ) {
         this.logger.debug('PizzaController created');
     }
 
@@ -24,7 +41,16 @@ export class PizzaController {
         isArray: true,
     })
     public async getAllPizzas(): Promise<Pizza[]> {
-        return this.pizzaService.getALlPizzas();
+        const cachedPizza: Pizza[] = await this.cacheManager.get('pizzaKey');
+        if (cachedPizza) {
+            console.log('cached');
+            return cachedPizza;
+        }
+        console.log(cachedPizza, '<--');
+        const pizzas = await this.pizzaService.getALlPizzas();
+        console.log('storing');
+        await this.cacheManager.set('pizzaKey', pizzas, 10000);
+        return pizzas;
     }
 
     @Get(':id')
