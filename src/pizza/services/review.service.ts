@@ -23,4 +23,8 @@ export class ReviewService {
         review = await this.reviewRepository.save(review);
         return review;
     }
+
+  getReviewsByPizzaId(pizzaId: number): Promise<Review[]> {
+    return this.reviewRepository.findBy({ pizza: { id: pizzaId }});
+  }
 }

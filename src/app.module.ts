@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
 import { AuthModule } from './auth/auth.module';
 import { UsersService } from './auth/services/users.service';
+import { GraphQLModule } from "@nestjs/graphql";
+import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 
 @Module({
     imports: [
@@ -27,6 +29,13 @@ import { UsersService } from './auth/services/users.service';
                     },
                 },
             },
+        }),
+        GraphQLModule.forRoot<ApolloDriverConfig>({
+            driver: ApolloDriver,
+            debug: true,
+            playground: true,
+            autoSchemaFile: true,
+            sortSchema: true
         }),
         PizzaModule,
         AuthModule,
