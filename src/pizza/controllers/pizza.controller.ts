@@ -3,13 +3,22 @@ import { PizzaService } from '../services/pizza.service';
 import { Pizza } from '../../entities/pizza.entity';
 import { PizzaNameValidationPipe } from '../pipes/pizza-name.pipe';
 import { PizzaDuplicateNameValidationPipe } from '../pipes/pizza-duplicate-name.pipe';
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+    ApiBadRequestResponse,
+    ApiBearerAuth,
+    ApiCreatedResponse,
+    ApiNotFoundResponse,
+    ApiOkResponse,
+    ApiOperation,
+    ApiTags,
+} from '@nestjs/swagger';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { JwtAuthGuard } from '../../auth/guards/JwtAuthGuard';
 
 @Controller('/pizza')
 @ApiTags('Pizza')
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 export class PizzaController {
     constructor(@InjectPinoLogger(PizzaController.name) private readonly logger: PinoLogger, private readonly pizzaService: PizzaService) {
         this.logger.debug('PizzaController created');

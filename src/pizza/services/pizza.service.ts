@@ -25,19 +25,19 @@ export class PizzaService implements OnModuleInit {
     }
 
     public async getALlPizzas(): Promise<Pizza[]> {
-        return this.pizzasRepository.find();
+        return this.pizzasRepository.find({ relations: ['reviews'] });
     }
 
     public async getPizzaById(id: number): Promise<Pizza | null> {
-        return this.pizzasRepository.findOneBy({ id });
+        return this.pizzasRepository.findOne({ where: { id }, relations: ['reviews'] });
     }
 
     public async addPizza(pizza: Pizza): Promise<Pizza> {
-        return this.pizzasRepository.save(pizza);
+        return this.pizzasRepository.save(pizza, {});
     }
 
     public async getPizzaByName(name: string): Promise<Pizza | null> {
-        return this.pizzasRepository.findOneBy({name});
+        return this.pizzasRepository.findOneBy({ name });
     }
 
     public async clearAll() {
