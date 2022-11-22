@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
 import { PizzaController } from './controllers/pizza.controller';
-import { PizzaService } from './services/pizza.service';
 import { ReviewController } from './controllers/review.controller';
-import { ReviewService } from './services/review.service';
 
 @Module({
     imports: [],
     controllers: [PizzaController, ReviewController],
-    providers: [PizzaService, ReviewService],
+    providers: [], //[HINT] You need to inform NestJS of all injectables, if it is not a controller it is a provider (https://docs.nestjs.com/providers),
 })
 export class PizzaModule {}
