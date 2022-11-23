@@ -34,4 +34,10 @@ export class PizzaController {
     public async addPizza(@Body() pizza: Pizza): Promise<Pizza> {
         return this.pizzaService.addPizza(pizza);
     }
+
+    /**
+     * Extra credit:
+     *   A: Add an endpoint for the deletion of a pizza by id
+     *   B: Add the possibility of filtering the pizzas by name as a query param
+     */
 }
