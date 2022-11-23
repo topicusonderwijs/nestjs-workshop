@@ -4,7 +4,11 @@ import { PizzaService } from "../../services/pizza.service";
 import { Review } from "../models/review.model";
 import { ReviewService } from "../../services/review.service";
 import { PizzaInput } from "../models/pizza-input.model";
+import { UseGuards, UsePipes } from "@nestjs/common";
+import { GraphqlJwtAuthGuard } from "../../../auth/graphql/guards/graphql-jwt-auth.guard";
+import { PizzaDuplicateNameValidationPipe } from "../../pipes/pizza-duplicate-name.pipe";
 
+@UseGuards(GraphqlJwtAuthGuard)
 @Resolver(of => Pizza)
 export class PizzaResolver {
   constructor(private readonly pizzaService: PizzaService,
@@ -15,6 +19,7 @@ export class PizzaResolver {
     return this.pizzaService.getALlPizzas();
   }
 
+  @UsePipes(PizzaDuplicateNameValidationPipe)
   @Mutation(returns => Pizza)
   async createPizza(@Args({name: 'pizzaInput', type: () => PizzaInput}) pizzaInput: PizzaInput): Promise<Pizza> {
     return this.pizzaService.addPizza({ ...pizzaInput, id: null, reviews: [] });

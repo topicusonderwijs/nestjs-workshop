@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { LoginController } from './controllers/login.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { AuthResolver } from "./graphql/resolvers/auth.resolver";
 
 @Module({
     imports: [
@@ -16,7 +17,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
             signOptions: { expiresIn: '60m' },
         }),
     ],
-    providers: [AuthService, UsersService, LocalStrategy, JwtStrategy],
+    providers: [AuthService, UsersService, LocalStrategy, JwtStrategy, AuthResolver],
     controllers: [LoginController],
 })
 export class AuthModule {}

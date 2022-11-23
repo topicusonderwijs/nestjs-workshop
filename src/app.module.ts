@@ -35,7 +35,8 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
             debug: true,
             playground: true,
             autoSchemaFile: true,
-            sortSchema: true
+            sortSchema: true,
+            context: ({ req }) => ({ req })
         }),
         PizzaModule,
         AuthModule,
