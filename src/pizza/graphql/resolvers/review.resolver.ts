@@ -11,7 +11,7 @@ export class ReviewResolver {
   constructor(private readonly reviewService: ReviewService) {}
 
   @Mutation(returns => Review, )
-  reviewCreate(@Args( { name: 'pizzaId', type: () => Int}) pizzaId: number,
+  createReview(@Args( { name: 'pizzaId', type: () => Int}) pizzaId: number,
                @Args({ name: 'reviewInput', type: () => ReviewInput}) reviewInput: ReviewInput): Promise<Review> {
     return this.reviewService.submitReview(pizzaId, { ...reviewInput, id: null, pizza: null, reviewedBy: 'Test' })
   }
