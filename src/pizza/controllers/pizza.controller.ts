@@ -13,8 +13,8 @@ import { Pizza } from '../../entities/pizza.entity';
  */
 export class PizzaController {
     /**
-     * NestJS uses constructor dependency injection. So when a controller is created by NestJS it will lookup all constructor parameters
-     * as dependencies. It knows about dependencies trough its module definition (pizza.module.ts)
+     * NestJS uses constructor dependency injection. So when a controller is created by NestJS it will look up all constructor parameters
+     * as dependencies. It knows about dependencies through its module definition (pizza.module.ts)
      */
     constructor(private readonly pizzaService: PizzaService) {}
 
@@ -30,7 +30,7 @@ export class PizzaController {
         return pizza;
     }
 
-    //[HINT] Creating a pizza is not an @Get
+    //[HINT] Creating a pizza is not a @Get
     public async addPizza(@Body() pizza: Pizza): Promise<Pizza> {
         return this.pizzaService.addPizza(pizza);
     }

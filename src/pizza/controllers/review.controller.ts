@@ -13,8 +13,8 @@ import { Review } from '../../entities/review.entity';
  */
 export class ReviewController {
     /**
-     * NestJS uses constructor dependency injection. So when a controller is created by NestJS it will lookup all constructor parameters
-     * as dependencies. It knows about dependencies trough its module definition (pizza.module.ts)
+     * NestJS uses constructor dependency injection. So when a controller is created by NestJS it will look up all constructor parameters
+     * as dependencies. It knows about dependencies through its module definition (pizza.module.ts)
      */
     constructor(private readonly reviewService: ReviewService) {}
 
