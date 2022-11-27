@@ -28,7 +28,8 @@ You can also create your own validation rules, called Pipes. These pipes can be 
 https://docs.nestjs.com/pipes
 
 ```
-In this assignment you will get some basic knowledge on NestJS validation module for validating your REST APIs
+In this assignment you will get some basic knowledge on NestJS validation module 
+for validating your REST APIs
 ```
 
 ## Assignment 3 - Swagger
@@ -38,7 +39,8 @@ NestJS uses the OpenAPI spec to add documentation to your projects. For this it 
 you must complete the swagger docs.
 
 ```
-In this assignment you will get some basic knowledge on NestJS OpenAPI spec implementation using Swagger
+In this assignment you will get some basic knowledge on NestJS OpenAPI spec implementation 
+using Swagger
 ```
 
 ## Assignment 4 - Database
@@ -49,7 +51,8 @@ database (https://docs.nestjs.com/techniques/database). For this assignment we w
 database (https://www.npmjs.com/package/sqlite3). We will use the typeorm plugin of NestJS to connect with the database.
 
 ```
-In this assignment you will get some basic knowledge on NestJS typeorm implementation for working with databases
+In this assignment you will get some basic knowledge on NestJS typeorm implementation 
+for working with databases
 ```
 
 ## Assignment 5 - Configuration and logging
@@ -61,7 +64,8 @@ This server is also not yet logging anything. We want to change this by adding a
 lib (https://github.com/iamolegga/nestjs-pino)
 
 ```
-In this assignment you will get some basic knowledge on NestJS configuration management, and use a logging lib
+In this assignment you will get some basic knowledge on NestJS 
+configuration management, and use a logging lib
 ```
 
 ## Assignment 6 - Authentication
@@ -75,7 +79,8 @@ The new auth module is added to the app.module.ts and is providing a hardcoded u
 secure your pizza and review endpoint.
 
 ```
-In this assignment you will get some basic knowledge on NestJS authentication support using passport
+In this assignment you will get some basic knowledge on NestJS 
+authentication support using passport
 ```
 
 ## Extras
