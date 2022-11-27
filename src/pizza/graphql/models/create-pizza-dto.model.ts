@@ -1,7 +1,7 @@
 import { Field, InputType, Int } from "@nestjs/graphql";
 
 @InputType()
-export class PizzaInput {
+export class CreatePizzaDto {
   @Field(type => String, {description: 'The unique name of this pizza',})
   name: string;
 

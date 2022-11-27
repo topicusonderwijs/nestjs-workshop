@@ -36,6 +36,12 @@ export class PizzaService implements OnModuleInit {
         return this.pizzasRepository.save(pizza, {});
     }
 
+    public async updatePizza(pizzaId: number, updatedValues: Partial<Pizza>): Promise<Pizza> {
+        const pizza = await this.getPizzaById(pizzaId);
+        const updatedPizza = {...pizza, ...updatedValues};
+        return this.pizzasRepository.save(updatedPizza);
+    }
+
     public async getPizzaByName(name: string): Promise<Pizza | null> {
         return this.pizzasRepository.findOneBy({ name });
     }
