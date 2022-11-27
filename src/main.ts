@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ConfigService } from '@nestjs/config';
 import { applyAppConfig } from './main.config';
 import { Logger } from 'nestjs-pino';
 
@@ -9,8 +10,8 @@ async function bootstrap() {
 
     applyAppConfig(app, logger);
 
-    //[HINT] Get a reference to the ConfigService using `app.get`
-    const serverPort = 3000; //change this so it uses the .env value
+    const configService = app.get<ConfigService>(ConfigService);
+    const serverPort = configService.get('server.port');
     await app.listen(serverPort, () => {
         logger.log(`Server running on port ${serverPort}`);
     });
