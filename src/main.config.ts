@@ -11,7 +11,6 @@ export const applyAppConfig = (app: INestApplication, logger: Logger) => {
 
     app.useLogger(logger);
     const config = new DocumentBuilder()
-        .addBearerAuth()
         .setTitle('Topicus Pizza server')
         .setDescription('Api server for pizza management')
         .setVersion('1.0')
