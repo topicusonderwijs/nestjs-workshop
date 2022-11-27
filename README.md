@@ -34,7 +34,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-# Assignment 4 - Configuration and logging
+# Assignment 5 - Configuration and logging
 
 This server is still using some hardcoded values. NestJS has a build in configuration module which you can use to read
 this configuration from config files (https://docs.nestjs.com/techniques/configuration).
