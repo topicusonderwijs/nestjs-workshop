@@ -38,10 +38,8 @@ $ npm run test:cov
 
 Now that we have validated endpoints for our server its time to add some documentation.  
 NestJS uses the OpenAPI spec to add documentation to your projects. For this it uses the swagger lib.
-In this assignment you must complete the swagger docs. We have setup the swagger plugin so it runs
-on `http://localhost:3000/api` (see `main.config.ts`)
-
-Start the server with `npm run start` and navigate to `http://localhost:3000/api` to see the basic swagger page
+In this assignment you will add the swagger plugin so when you run your server and go to `http://localhost:3000/api` you
+get a swagger page which documents the pizza and review endpoints.
 
 - Make sure you separate sections in your docs for the pizza and review endpoint, dont use the `default` section.
 - Make sure you add descriptions for the responses

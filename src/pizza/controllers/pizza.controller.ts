@@ -3,12 +3,10 @@ import { PizzaService } from '../services/pizza.service';
 import { Pizza } from '../../entities/pizza.entity';
 import { PizzaNameValidationPipe } from '../pipes/pizza-name.pipe';
 import { PizzaDuplicateNameValidationPipe } from '../pipes/pizza-duplicate-name.pipe';
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('/pizza')
-//[HINT] NestJS will add all controllers to the "default" section.
-//If you want a different section you will need to tell NestJS that this with some annotation
-//https://docs.nestjs.com/openapi/operations
+@ApiTags('Pizza')
 export class PizzaController {
     /**
      * NestJS uses constructor dependency injection. So when a controller is created by NestJS it will lookup all constructor parameters
