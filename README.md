@@ -36,14 +36,21 @@ $ npm run test:cov
 
 # Assignment 4 - Configuration and logging
 
-This server is still using some hardcoded values. NestJS has a build in configuration module which you can use to read
-this configuration from config files (https://docs.nestjs.com/techniques/configuration).
+Until now the endpoints on this server where public. We changed this by adding a authentication module. NestJS has build
+in support for adding authentication (https://docs.nestjs.com/security/authenticationnpm ) using
+passport (https://www.npmjs.com/package/passport)
 
-This server is also not yet logging anything. We want to change this by adding a logging
-lib (https://github.com/iamolegga/nestjs-pino)
+The new auth module is added to the `app.module.ts` and is providing a hardcoded username/password
+login (`user.service.ts`). When you use the login endpoint with a hardcoded user you will receive an access token JWT.
+This JWT can be used to secure your pizza and review endpoint.
 
-This assignment is simple, change the port of the server from 3000 to the value you set in the `.env` file, and add
-logging to all REST endpoints
+For this assignment you will need to fix/implement the following tasks:
+
+- Add Bearer authentication to swagger (`main.config.ts`) so that you get an authorization button in your swagger page
+- Tell swagger that you controllers you use Bearer authentication (https://docs.nestjs.com/openapi/security)
+- Add security to the pizza and review endpoint by adding a `guard`
+- When you add security you your endpoints the tests will start to fail, fix this by overriding the security for
+  tests (https://docs.nestjs.com/fundamentals/testing#end-to-end-testing)
 
 We have setup a base NestJS project which represents a Pizza server with 2 endpoints:
 
