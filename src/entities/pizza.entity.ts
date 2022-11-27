@@ -1,4 +1,4 @@
-import { IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Review } from './review.entity';
 import { Type } from 'class-transformer';
 
@@ -10,8 +10,9 @@ export class Pizza {
 
     size: number;
 
-    //[HINT] We need to validate that this is a array
     @Type(() => Review)
+    @IsArray()
+    @IsOptional()
     @ValidateNested()
     reviews: Review[];
 }

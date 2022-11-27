@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { Response } from 'supertest';
 import { AppModule } from './../src/app.module';
+import { applyAppConfig } from '../src/main.config';
 
 describe('Review Controller (e2e)', () => {
     let app: INestApplication;
@@ -13,7 +14,7 @@ describe('Review Controller (e2e)', () => {
         }).compile();
 
         app = moduleFixture.createNestApplication();
-        //[HINT] Probably missing some global pipes, check the main.ts
+        applyAppConfig(app);
         await app.init();
     });
 

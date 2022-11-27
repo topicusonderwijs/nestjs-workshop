@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsPositive, IsString, Max, Min } from 'class-validator';
 
 export class Review {
     id: number;
@@ -6,6 +6,8 @@ export class Review {
     @IsString()
     reviewedBy: string;
 
-    //[HINT] We only allow star values between 0 and 5
+    @Min(0)
+    @Max(5)
+    @IsPositive()
     stars: number;
 }
