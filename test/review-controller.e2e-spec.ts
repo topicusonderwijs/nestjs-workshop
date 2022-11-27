@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { Response } from 'supertest';
 import { AppModule } from './../src/app.module';
+import { applyAppConfig } from '../src/main.config';
 
 describe('Review Controller (e2e)', () => {
     let app: INestApplication;
@@ -13,6 +14,7 @@ describe('Review Controller (e2e)', () => {
         }).compile();
 
         app = moduleFixture.createNestApplication();
+        applyAppConfig(app);
         await app.init();
     });
 
@@ -39,5 +41,34 @@ describe('Review Controller (e2e)', () => {
                 stars: 5,
             })
             .expect(404);
+    });
+    it('It should return a 400 when stars < 0', () => {
+        return request(app.getHttpServer())
+            .post('/review/1')
+            .send({
+                reviewedBy: 'test-user',
+                stars: -1,
+            })
+            .expect(400);
+    });
+
+    it('It should return a 400 when stars > 5', () => {
+        return request(app.getHttpServer())
+            .post('/review/1')
+            .send({
+                reviewedBy: 'test-user',
+                stars: 6,
+            })
+            .expect(400);
+    });
+
+    it('It should return a 400 when reviewedBy is not a string', () => {
+        return request(app.getHttpServer())
+            .post('/review/1')
+            .send({
+                reviewedBy: 1234,
+                stars: 3,
+            })
+            .expect(400);
     });
 });

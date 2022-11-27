@@ -4,6 +4,7 @@ import * as request from 'supertest';
 import { Response } from 'supertest';
 import { AppModule } from './../src/app.module';
 import { v4 as uuidv4 } from 'uuid';
+import { applyAppConfig } from '../src/main.config';
 
 describe('Pizza Controller (e2e)', () => {
     let app: INestApplication;
@@ -14,6 +15,7 @@ describe('Pizza Controller (e2e)', () => {
         }).compile();
 
         app = moduleFixture.createNestApplication();
+        applyAppConfig(app);
         await app.init();
     });
 
@@ -38,5 +40,35 @@ describe('Pizza Controller (e2e)', () => {
                 expect(err).toBeUndefined();
                 expect(res.body.name).toEqual(pizzaName);
             });
+    });
+
+    it('It should return 400 when you create a pizza without a name', () => {
+        return request(app.getHttpServer())
+            .post('/pizza')
+            .send({
+                size: 40,
+            })
+            .expect(400);
+    });
+
+    it('It should return 400 for duplicate pizza name', () => {
+        //There is a hardcoded pizza in the service with the name Salami, so we should not be able to create a new one
+        return request(app.getHttpServer())
+            .post('/pizza')
+            .send({
+                name: 'Salami',
+                size: 40,
+            })
+            .expect(400);
+    });
+
+    it('It should return a 400 when name is not a string', () => {
+        return request(app.getHttpServer())
+            .post('/pizza')
+            .send({
+                name: 1234,
+                size: 40,
+            })
+            .expect(400);
     });
 });
