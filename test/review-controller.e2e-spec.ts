@@ -4,6 +4,8 @@ import * as request from 'supertest';
 import { Response } from 'supertest';
 import { AppModule } from './../src/app.module';
 import { applyAppConfig } from '../src/main.config';
+import { Logger } from 'nestjs-pino';
+import { JwtAuthGuard } from '../src/auth/guards/JwtAuthGuard';
 
 describe('Review Controller (e2e)', () => {
     let app: INestApplication;
@@ -11,10 +13,14 @@ describe('Review Controller (e2e)', () => {
     beforeEach(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
             imports: [AppModule],
-        }).compile();
+        })
+            .overrideGuard(JwtAuthGuard)
+            .useValue(true)
+            .compile();
 
         app = moduleFixture.createNestApplication();
-        applyAppConfig(app);
+        const logger = app.get(Logger);
+        applyAppConfig(app, logger);
         await app.init();
     });
 
