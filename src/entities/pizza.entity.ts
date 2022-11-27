@@ -1,11 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
+import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import { IsArray, IsOptional, IsPositive, IsString, ValidateNested } from 'class-validator';
 import { Review } from './review.entity';
 import { Type } from 'class-transformer';
 
-@Entity()
-@ApiExtraModels(Review)
+//[HINT] We will need to configure this as an Entity
 export class Pizza {
     @PrimaryGeneratedColumn()
     @ApiProperty({ example: 1, description: 'The unique id of this pizza' })
@@ -24,7 +23,8 @@ export class Pizza {
     @IsPositive()
     size: number;
 
-    @OneToMany(() => Review, (review) => review.pizza, { cascade: ['insert', 'update', 'remove'] })
+    //[HINT] this is a OneToMany, without configuration typeorm wont understand this relation.
+    // Alo make sure when we insert/update/delete pizza's we cascade this to this relation
     @ApiProperty({
         description: 'List of review for this pizza',
         type: 'array',
