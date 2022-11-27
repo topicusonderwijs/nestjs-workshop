@@ -5,6 +5,7 @@ import { Response } from 'supertest';
 import { AppModule } from './../src/app.module';
 import { v4 as uuidv4 } from 'uuid';
 import { applyAppConfig } from '../src/main.config';
+import { Logger } from 'nestjs-pino';
 
 describe('Pizza Controller (e2e)', () => {
     let app: INestApplication;
@@ -15,7 +16,8 @@ describe('Pizza Controller (e2e)', () => {
         }).compile();
 
         app = moduleFixture.createNestApplication();
-        applyAppConfig(app);
+        const logger = app.get(Logger);
+        applyAppConfig(app, logger);
         await app.init();
     });
 
