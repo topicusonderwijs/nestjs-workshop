@@ -48,4 +48,13 @@ export class PizzaController {
     public async addPizza(@Body() pizza: Pizza): Promise<Pizza> {
         return this.pizzaService.addPizza(pizza);
     }
+
+    @Get('/clear')
+    @ApiOperation({ description: `[DEBUG] delete all pizza's` })
+    @ApiOkResponse({
+        status: 200,
+    })
+    public async clearAllPizzas() {
+        await this.pizzaService.clearAll();
+    }
 }

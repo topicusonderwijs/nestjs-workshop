@@ -34,16 +34,13 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-# Assignment 3 - Swagger
+# Assignment 4 - Database
 
-Now that we have validated endpoints for our server its time to add some documentation.  
-NestJS uses the OpenAPI spec to add documentation to your projects. For this it uses the swagger lib.
-In this assignment you will add the swagger plugin so when you run your server and go to `http://localhost:3000/api` you
-get a swagger page which documents the pizza and review endpoints.
-
-- Make sure you separate sections in your docs for the pizza and review endpoint, dont use the `default` section.
-- Make sure you add descriptions for the responses
-- Make sure you get a working example value of the objects returned by the endpoints
+For now our server is using a hardcoded list as data source. In a real world app we would use some sort of database for
+this. NestJS has build in support for connecting and managing to a
+database (https://docs.nestjs.com/techniques/database). For this assignment we will be using a in-memory
+database (https://www.npmjs.com/package/sqlite3). We will use the `typeorm` plugin of NestJS to connect with the
+database.
 
 We have setup a base NestJS project which represents a Pizza server with 2 endpoints:
 
@@ -63,3 +60,7 @@ The data model for this:
 |  Review   |
 -------------
 ```
+
+In the current state the app won't work since it is missing some logic. You can check this by running npm run test:e2e
+
+Your assignment is to make the test pass, by fixing the broken code.
