@@ -33,13 +33,14 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-  
-# Assignment 1 - Controllers
 
-NestJS makes it easy to create REST endpoints for your API server. These endpoints are called `controllers`.  
-Controllers can make use of services for the business logic of your app.  
-The services can be injected using the DIP
-system of NestJS.
+# Assignment 2 - Validation
+
+Now that we have a working app with some endpoints we can add validation to these endpoints.  
+NestJS has a build in system for validating the objects you receive in your endpoints.  
+You can also create your own validation rules, called Pipes. These pipes can be added to your endpoints using
+the `@UsePipes` annotation.  
+https://docs.nestjs.com/pipes
 
 We have setup a base NestJS project which represents a Pizza server with 2 endpoints:
 

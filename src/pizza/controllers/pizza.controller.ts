@@ -1,8 +1,6 @@
-import { Body, Controller, Get, NotFoundException, Param, Post, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
 import { PizzaService } from '../services/pizza.service';
 import { Pizza } from '../../entities/pizza.entity';
-import { PizzaNameValidationPipe } from '../pipes/pizza-name.pipe';
-import { PizzaDuplicateNameValidationPipe } from '../pipes/pizza-duplicate-name.pipe';
 
 @Controller('/pizza')
 export class PizzaController {
@@ -25,7 +23,7 @@ export class PizzaController {
     }
 
     @Post()
-    @UsePipes(PizzaNameValidationPipe, PizzaDuplicateNameValidationPipe)
+    //[HINT] we will be needing some pipes here
     public async addPizza(@Body() pizza: Pizza): Promise<Pizza> {
         return this.pizzaService.addPizza(pizza);
     }

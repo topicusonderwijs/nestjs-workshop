@@ -4,7 +4,6 @@ import * as request from 'supertest';
 import { Response } from 'supertest';
 import { AppModule } from './../src/app.module';
 import { v4 as uuidv4 } from 'uuid';
-import { applyAppConfig } from '../src/main.config';
 
 describe('Pizza Controller (e2e)', () => {
     let app: INestApplication;
@@ -15,7 +14,7 @@ describe('Pizza Controller (e2e)', () => {
         }).compile();
 
         app = moduleFixture.createNestApplication();
-        applyAppConfig(app);
+        //[HINT] Probably missing some global pipes, check the main.ts
         await app.init();
     });
 
