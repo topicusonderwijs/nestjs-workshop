@@ -4,16 +4,12 @@ import { Pizza } from '../../entities/pizza.entity';
 import { PizzaNameValidationPipe } from '../pipes/pizza-name.pipe';
 import { PizzaDuplicateNameValidationPipe } from '../pipes/pizza-duplicate-name.pipe';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 
 @Controller('/pizza')
 @ApiTags('Pizza')
 export class PizzaController {
-    /**
-     * NestJS uses constructor dependency injection. So when a controller is created by NestJS it will lookup all constructor parameters
-     * as dependencies. It knows about dependencies trough its module definition (pizza.module.ts)
-     */
-    constructor(@InjectPinoLogger(PizzaController.name) private readonly logger: PinoLogger, private readonly pizzaService: PizzaService) {
+    //[Hint] Inject a PinoLogger, since we are using a lib use their custom annotation `@InjectPinoLogger`
+    constructor(private readonly pizzaService: PizzaService) {
         this.logger.debug('PizzaController created');
     }
 
@@ -51,7 +47,7 @@ export class PizzaController {
     @ApiCreatedResponse({ description: `The created pizza`, type: Pizza })
     @ApiBadRequestResponse({ status: 400, description: 'When validation fails.' })
     public async addPizza(@Body() pizza: Pizza): Promise<Pizza> {
-        this.logger.info('addPizza endpoint called with pizza %o', pizza);
+        //TODO add logging here with the pizza in the log
         return this.pizzaService.addPizza(pizza);
     }
 
