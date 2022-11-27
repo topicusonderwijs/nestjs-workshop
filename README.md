@@ -34,13 +34,16 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-# Assignment 4 - Database
+# Assignment 4 - Configuration and logging
 
-For now our server is using a hardcoded list as data source. In a real world app we would use some sort of database for
-this. NestJS has build in support for connecting and managing to a
-database (https://docs.nestjs.com/techniques/database). For this assignment we will be using a in-memory
-database (https://www.npmjs.com/package/sqlite3). We will use the `typeorm` plugin of NestJS to connect with the
-database.
+This server is still using some hardcoded values. NestJS has a build in configuration module which you can use to read
+this configuration from config files (https://docs.nestjs.com/techniques/configuration).
+
+This server is also not yet logging anything. We want to change this by adding a logging
+lib (https://github.com/iamolegga/nestjs-pino)
+
+This assignment is simple, change the port of the server from 3000 to the value you set in the `.env` file, and add
+logging to all REST endpoints
 
 We have setup a base NestJS project which represents a Pizza server with 2 endpoints:
 
@@ -60,7 +63,3 @@ The data model for this:
 |  Review   |
 -------------
 ```
-
-In the current state the app won't work since it is missing some logic. You can check this by running npm run test:e2e
-
-Your assignment is to make the test pass, by fixing the broken code.
