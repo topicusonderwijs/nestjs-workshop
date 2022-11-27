@@ -33,13 +33,17 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-  
-# Assignment 1 - Controllers
 
-NestJS makes it easy to create REST endpoints for your API server. These endpoints are called `controllers`.  
-Controllers can make use of services for the business logic of your app.  
-The services can be injected using the DIP
-system of NestJS.
+# Assignment 3 - Swagger
+
+Now that we have validated endpoints for our server its time to add some documentation.  
+NestJS uses the OpenAPI spec to add documentation to your projects. For this it uses the swagger lib.
+In this assignment you will add the swagger plugin so when you run your server and go to `http://localhost:3000/api` you
+get a swagger page which documents the pizza and review endpoints.
+
+- Make sure you separate sections in your docs for the pizza and review endpoint, dont use the `default` section.
+- Make sure you add descriptions for the responses
+- Make sure you get a working example value of the objects returned by the endpoints
 
 We have setup a base NestJS project which represents a Pizza server with 2 endpoints:
 
@@ -59,8 +63,3 @@ The data model for this:
 |  Review   |
 -------------
 ```
-
-In the current state the app won't work since it is missing some logic.
-You can check this by running `npm run test:e2e`
-
-Your assignment is to make the test pass, by fixing the broken code.
