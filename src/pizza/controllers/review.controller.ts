@@ -1,14 +1,11 @@
-import { Body, Controller, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
-import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { ReviewService } from '../services/review.service';
 import { Review } from '../../entities/review.entity';
-import { JwtAuthGuard } from '../../auth/guards/JwtAuthGuard';
 
 @Controller('/review')
 @ApiTags('Review')
-@UseGuards(JwtAuthGuard)
-@ApiBearerAuth()
 export class ReviewController {
     constructor(
         @InjectPinoLogger(ReviewController.name) private readonly logger: PinoLogger,

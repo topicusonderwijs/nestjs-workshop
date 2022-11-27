@@ -6,7 +6,6 @@ import { AppModule } from './../src/app.module';
 import { v4 as uuidv4 } from 'uuid';
 import { applyAppConfig } from '../src/main.config';
 import { Logger } from 'nestjs-pino';
-import { JwtAuthGuard } from '../src/auth/guards/JwtAuthGuard';
 
 describe('Pizza Controller (e2e)', () => {
     let app: INestApplication;
@@ -14,10 +13,7 @@ describe('Pizza Controller (e2e)', () => {
     beforeEach(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
             imports: [AppModule],
-        })
-            .overrideGuard(JwtAuthGuard)
-            .useValue(true)
-            .compile();
+        }).compile();
 
         app = moduleFixture.createNestApplication();
         const logger = app.get(Logger);
