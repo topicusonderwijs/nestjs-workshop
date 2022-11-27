@@ -1,10 +1,12 @@
 import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { ReviewService } from '../services/review.service';
 import { Review } from '../../entities/review.entity';
 
 @Controller('/review')
-@ApiTags('Review')
+//[HINT] NestJS will add all controllers to the "default" section.
+//If you want a different section you will need to tell NestJS that this with some annotation
+//https://docs.nestjs.com/openapi/operations
 export class ReviewController {
     /**
      * NestJS uses constructor dependency injection. So when a controller is created by NestJS it will lookup all constructor parameters
