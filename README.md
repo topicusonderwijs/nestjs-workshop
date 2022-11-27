@@ -34,7 +34,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-# Assignment 4 - Configuration and logging
+# Assignment 6 - Authentication
 
 Until now the endpoints on this server where public. We changed this by adding a authentication module. NestJS has build
 in support for adding authentication (https://docs.nestjs.com/security/authenticationnpm ) using
