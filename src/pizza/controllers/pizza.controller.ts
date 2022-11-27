@@ -1,16 +1,8 @@
-import { Body, Get, NotFoundException, Param } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
 import { PizzaService } from '../services/pizza.service';
 import { Pizza } from '../../entities/pizza.entity';
 
-/**
- * [HINT]
- * The PizzaModule (pizza.module.ts) defines all dependencies (controllers and providers).
- * But we also need to let NestJS know that this class is an actual controller.
- * NestJS does this by looking for annotation on classes
- *
- * Also make sure, the pizza controller uses the /pizza endpoint
- * https://docs.nestjs.com/controllers
- */
+@Controller('/pizza')
 export class PizzaController {
     /**
      * NestJS uses constructor dependency injection. So when a controller is created by NestJS it will lookup all constructor parameters
@@ -30,7 +22,7 @@ export class PizzaController {
         return pizza;
     }
 
-    //[HINT] Creating a pizza is not an @Get
+    @Post()
     public async addPizza(@Body() pizza: Pizza): Promise<Pizza> {
         return this.pizzaService.addPizza(pizza);
     }
