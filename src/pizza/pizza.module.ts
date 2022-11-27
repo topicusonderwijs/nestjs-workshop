@@ -4,9 +4,11 @@ import { ReviewController } from './controllers/review.controller';
 import { PizzaService } from './services/pizza.service';
 import { ReviewService } from './services/review.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Pizza } from '../entities/pizza.entity';
+import { Review } from '../entities/review.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([])], //[HINT] we will need to tell typeorm which entities are used in this module
+    imports: [TypeOrmModule.forFeature([Pizza, Review])],
     controllers: [PizzaController, ReviewController],
     providers: [PizzaService, ReviewService],
 })

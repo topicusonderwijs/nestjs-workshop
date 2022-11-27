@@ -1,9 +1,9 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsPositive, IsString, Max, Min } from 'class-validator';
 import { Pizza } from './pizza.entity';
 
-//[HINT] We will need to configure this as an Entity
+@Entity()
 export class Review {
     @PrimaryGeneratedColumn()
     @ApiProperty({ example: 1, description: 'The unique id of this review' })
@@ -17,7 +17,7 @@ export class Review {
     @IsString()
     reviewedBy: string;
 
-    //[HINT] this is also a relation
+    @ManyToOne(() => Pizza, (pizza) => pizza.reviews)
     pizza: Pizza;
 
     @Column()
