@@ -3,6 +3,8 @@ import { PizzaModule } from './pizza/pizza.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
+import { AuthModule } from './auth/auth.module';
+import { UsersService } from './auth/services/users.service';
 
 @Module({
     imports: [
@@ -27,8 +29,9 @@ import { LoggerModule } from 'nestjs-pino';
             },
         }),
         PizzaModule,
+        AuthModule,
     ],
     controllers: [],
-    providers: [],
+    providers: [UsersService],
 })
 export class AppModule {}
