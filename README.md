@@ -34,5 +34,5 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-
-http://localhost:4000/graphql
+## To open the GraphQL Playground
+Navigate to: http://localhost:4000/graphql
