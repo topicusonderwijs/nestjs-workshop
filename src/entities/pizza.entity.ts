@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
-import { IsArray, IsPositive, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsOptional, IsPositive, IsString, ValidateNested } from 'class-validator';
 import { Review } from './review.entity';
 import { Type } from 'class-transformer';
 
@@ -34,6 +34,7 @@ export class Pizza {
     })
     @Type(() => Review)
     @IsArray()
+    @IsOptional()
     @ValidateNested()
     reviews: Review[];
 }

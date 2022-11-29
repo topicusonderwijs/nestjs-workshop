@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { User, UsersService } from './users.service';
 import { JwtService } from '@nestjs/jwt';
+import { LoginDTO } from '../controllers/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,8 @@ export class AuthService {
         return user ?? null;
     }
 
-    generateAccessToken(user: User): { access_token: string } {
+    generateAccessToken(login: LoginDTO) {
+        const user = this.usersService.findOne(login.username, login.password);
         const payload = { username: user.username, sub: user.userId };
         return {
             access_token: this.jwtService.sign(payload),

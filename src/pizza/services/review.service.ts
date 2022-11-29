@@ -13,7 +13,7 @@ export class ReviewService {
         private pizzaService: PizzaService,
         @InjectPinoLogger(ReviewService.name) private readonly logger: PinoLogger,
     ) {
-        this.logger.debug('PizzaService created');
+        this.logger.debug('ReviewService created');
     }
 
     public async submitReview(pizzaId: number, review: Review): Promise<Review> {
@@ -21,7 +21,7 @@ export class ReviewService {
         if (!pizza) throw new NotFoundException(`No pizza found with id ${pizzaId}`);
         review.pizza = pizza;
         review = await this.reviewRepository.save(review);
-        return review;
+        return await this.reviewRepository.findOne({ where: { id: review.id }, relations: ['pizza'] });
     }
 
   getReviewsByPizzaId(pizzaId: number): Promise<Review[]> {

@@ -19,5 +19,6 @@ import { AuthResolver } from "./graphql/resolvers/auth.resolver";
     ],
     providers: [AuthService, UsersService, LocalStrategy, JwtStrategy, AuthResolver],
     controllers: [LoginController],
+    exports: [AuthService],
 })
 export class AuthModule {}
