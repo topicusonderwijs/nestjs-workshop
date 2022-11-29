@@ -1,6 +1,6 @@
 # nestjs-workshop
 
-https://github.com/topicusonderwijs/nestjs-workshop
+https://github.com/topicusonderwijs/nestjs-workshop  
 topicus-guest
 
 This is a public repository setup for the Topicus NestJS workshop. This repository contains a sample project for a
